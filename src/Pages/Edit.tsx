@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, TextField, Typography } from "@mui/material";
 import { parseCode } from "../Utils/LanguageUtils";
+import SubmitModal from "../Components/SubmitModal";
 
 interface IProps {
   setDebugMode: () => void;
@@ -30,9 +31,7 @@ export default function Edit({ setDebugMode }: IProps) {
       </Button>
       <br />
       <br />
-      <Button onClick={() => alert("submitting is not implemented yet")} variant="contained" color="primary" fullWidth>
-        Submit
-      </Button>
+      <SubmitModal code={code} />
       <br />
       <br />
     </>

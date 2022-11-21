@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Alert, Button, Grid, IconButton, TextField, Toolbar, Typography } from "@mui/material";
 import { commandToString, enlargeState, parseCode, Program, simulateProgram, Simulation } from "../Utils/LanguageUtils";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+import SubmitModal from "../Components/SubmitModal";
 
 const defaultInput = [
   "0",
@@ -47,7 +48,8 @@ export default function Debug({ setEditMode }: IProps) {
   const [simulation, setSimulation] = useState<Simulation | undefined>(undefined);
   const [step, setStep] = useState(0);
 
-  const code = parseCode(localStorage.getItem("rawCode") || "") as Program;
+  const rawCode = localStorage.getItem("rawCode") || "";
+  const code = parseCode(rawCode) as Program;
 
   const getLabel = (commandNumber: number) => (code === undefined ? "" : Object.keys(code.labels).find((l) => code.labels[l] === commandNumber) || "");
 
@@ -191,9 +193,7 @@ export default function Debug({ setEditMode }: IProps) {
       </Button>
       <br />
       <br />
-      <Button onClick={() => alert("submitting is not implemented yet")} variant="contained" color="primary" fullWidth>
-        Submit
-      </Button>
+      <SubmitModal code={rawCode} />
       <br />
       <br />
     </>
